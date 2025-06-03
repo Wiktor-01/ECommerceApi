@@ -1,0 +1,25 @@
+name: Build ASP.NET Core API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Pobierz kod z repozytorium
+      uses: actions/checkout@v4
+
+    - name: Zainstaluj .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Przywróć zależności
+      run: dotnet restore
+
+    - name: Zbuduj aplikację
+      run: dotnet build --no-restore --configuration Release
